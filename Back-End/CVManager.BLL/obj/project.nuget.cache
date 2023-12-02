@@ -1,0 +1,15 @@
+{
+  "version": 2,
+  "dgSpecHash": "gDbAmr+UE0PYS41yuwkcecRUkq4lGwbazTJoJhsRGnALu8hIydv3HE82oSdZ3XD08sBV7CNdtfELY7KxEOjjJw==",
+  "success": true,
+  "projectFilePath": "D:\\Technical\\Projects\\CVManagerSystem\\Back-End\\CVManager.BLL\\CVManager.BLL.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\ali_jaber\\.nuget\\packages\\fluentvalidation\\11.5.1\\fluentvalidation.11.5.1.nupkg.sha512",
+    "C:\\Users\\ali_jaber\\.nuget\\packages\\fluentvalidation.aspnetcore\\11.3.0\\fluentvalidation.aspnetcore.11.3.0.nupkg.sha512",
+    "C:\\Users\\ali_jaber\\.nuget\\packages\\fluentvalidation.dependencyinjectionextensions\\11.5.1\\fluentvalidation.dependencyinjectionextensions.11.5.1.nupkg.sha512",
+    "C:\\Users\\ali_jaber\\.nuget\\packages\\jetbrains.annotations\\2022.3.1\\jetbrains.annotations.2022.3.1.nupkg.sha512",
+    "C:\\Users\\ali_jaber\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\2.1.0\\microsoft.extensions.dependencyinjection.abstractions.2.1.0.nupkg.sha512",
+    "C:\\Users\\ali_jaber\\.nuget\\packages\\x.pagedlist\\8.4.7\\x.pagedlist.8.4.7.nupkg.sha512"
+  ],
+  "logs": []
+}

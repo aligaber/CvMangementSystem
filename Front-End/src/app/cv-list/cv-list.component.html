@@ -1,0 +1,277 @@
+<!--Page Title-->
+<h3 class="bg-light border-bottom px-2 py-1 d-flex">
+  <span>CVs</span>
+  <div class="btn btn-success ms-auto" (click)="showAddCVPopup(cvPopupTemplate)">
+    <span class="fa fa-plus"></span>
+    Add
+  </div>
+</h3>
+
+<!--Page Content-->
+<div class="page-content">
+  <table class="w-100 grid table-border" mat-table [dataSource]="cvs">
+    <div *ngFor="let item of displayedColumns; index as i">
+      <ng-container matColumnDef="{{ item }}" *ngIf="item !== 'actions'">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header disableClear>          
+          {{ displayedPlaceholders[i] }}
+        </th>
+        <td mat-cell *matCellDef="let row">
+          {{ row[item] }}
+        </td>
+      </ng-container>
+    </div>
+
+    <ng-container matColumnDef="actions">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header disableClear>
+        Actions
+      </th>
+      <td mat-cell *matCellDef="let row">
+        <ng-container>
+          <div
+            class="btn btn-primary mx-1"
+            (click)="showEditCVPopup(row, cvPopupTemplate)"
+          >
+            <span class="fa fa-edit"></span>
+            Edit
+          </div>
+
+          <div class="btn btn-danger mx-1" (click)="showDeletionConfirmation(row.id,deleteconfirmationPopupTemplate)">
+            <span class="fa fa-trash"></span>
+            Delete
+          </div>
+
+          <div class="btn btn-secondary mx-1" (click)="showExperiences(row, experiencesPopupTemplate)">
+            <span class="fa fa-info"></span>
+            show Experiences
+          </div>
+        </ng-container>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+
+    <tr class="mat-row  text-center" *matNoDataRow>
+      <td class="mat-cell" colspan="9999">No data to display</td>
+    </tr>
+  </table>
+
+  <mat-paginator
+    #paginator
+    [length]="totalRows"
+    [pageIndex]="currentPage"
+    [pageSize]="pageSize"
+    [pageSizeOptions]="pageSizeOptions"
+    (page)="pageChanged($event)"
+    showFirstLastButtons
+  >
+  </mat-paginator>
+</div>
+
+<!--Add / Edit CV popup-->
+<ng-template #cvPopupTemplate>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">
+      {{ isEditCV ? "Edit" : "Add" }}
+    </h4>
+    <button
+      type="button"
+      class="btn btn-light py-1 border"
+      aria-label="Close"
+      (click)="modalRef.hide()"
+    >
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="example-form">
+      <form novalidate [formGroup]="cvForm" class="loop-form">
+
+        <mat-form-field class="w-100">
+          <mat-label>Name</mat-label>
+          <input
+            formControlName="name"
+            matInput
+            placeholder="Enter Name"
+            value=""
+          />
+          <mat-error *ngIf="cvFormControls['name'].hasError('required')">Name is <strong>required</strong></mat-error>
+        </mat-form-field>
+        <form novalidate [formGroup]="personalInformationForm" class="loop-form">
+
+          <mat-form-field class="w-100">
+            <mat-label>Full Name</mat-label>
+            <input
+              formControlName="fullname"
+              matInput
+              placeholder="Enter Full Name"
+              value=""
+            />
+                <mat-error *ngIf="personalInformationFormControls['fullname'].hasError('required')">Full Name is <strong>required</strong></mat-error>
+          </mat-form-field>
+
+          <mat-form-field class="w-100">
+            <mat-label>City Name</mat-label>
+            <input
+              formControlName="cityname"
+              matInput
+              placeholder="Enter Cityname"
+              value=""
+            />
+          </mat-form-field>
+
+          <mat-form-field class="w-100">
+            <mat-label>Email</mat-label>
+            <input
+              formControlName="email"
+              matInput
+              placeholder="Enter Email"
+              value=""
+            />
+                <mat-error *ngIf="personalInformationFormControls['email'].hasError('email')">Please enter a valid email address</mat-error>
+          </mat-form-field>
+
+          <mat-form-field class="w-100">
+            <mat-label>Mobile Number</mat-label>
+            <input
+              formControlName="mobilenumber"
+              matInput
+              placeholder="Enter Mobile Number"
+              value=""
+            />
+            <mat-error *ngIf="personalInformationFormControls['mobilenumber'].hasError('required')">Mobile Number is <strong>required</strong></mat-error>
+            <mat-error *ngIf="personalInformationFormControls['mobilenumber'].hasError('pattern')">Mobile Number should contains <strong>numbers only</strong></mat-error>
+          </mat-form-field>
+      </form>
+
+        <!-- experience section -->
+        <h5>Add Experiences:</h5>
+          <ng-container formArrayName="experienceInformation">
+              <ng-container *ngFor="let experienceForm of experienceInformation.controls; let i = index">
+                  <div  [formGroupName]="i">
+                    <!-- <mat-icon class="delete-btn" (click)="deleteExperience(i)">
+                      delete_forever</mat-icon>   -->
+                      <div class="btn btn-danger mx-1" (click)="deleteExperience(i)">
+                        <span class="fa fa-trash"></span>
+                        Delete Experience
+                      </div>
+                    <mat-form-field class="w-100">
+                          <input matInput
+                                formControlName="companyName"
+                                placeholder="Company Name">
+                      <mat-error *ngIf="experienceInformation.at(i).get('companyName')?.hasError('required')">Company Name is <strong>required</strong></mat-error>
+                      <mat-error *ngIf="experienceInformation.at(i).get('companyName')?.hasError('maxlength')">Max length is 20</mat-error>
+                      </mat-form-field>
+                      <mat-form-field class="w-100">
+                        <input matInput
+                              formControlName="city"
+                              placeholder="City">
+                    </mat-form-field>
+                    <mat-form-field class="w-100">
+                      <input matInput
+                            formControlName="companyField"
+                            placeholder="Company Field">
+                  </mat-form-field>
+                  </div>
+              </ng-container>
+          </ng-container>
+          <div class="btn btn-success ms-auto" (click)="addExperience()">
+            <span class="fa fa-plus"></span>
+            Add New Experience
+          </div>
+        
+        <!-- end experiences -->
+        <br />
+        <div class="w-100 text-center">
+          <button
+            [disabled]="!cvForm.valid"
+            class="btn btn-primary w-50 mt-2"
+            (click)="cvForm.valid && (isEditCV ? editCV() : addCV())"
+
+          >
+            Save
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</ng-template>
+
+<!--show experiences popup-->
+<ng-template #experiencesPopupTemplate>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">
+      Experience Information
+    </h4>
+    <button
+      type="button"
+      class="btn btn-light py-1 border"
+      aria-label="Close"
+      (click)="modalRef.hide()"
+    >
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="page-content">
+      <table class="w-100 grid table-border" mat-table [dataSource]="experiences">
+        <div *ngFor="let item of displayedExperiencesColumns; index as i">
+          <ng-container matColumnDef="{{ item }}">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header disableClear>
+              {{ displayedExperiencesPlaceholders[i] }}
+            </th>
+            <td mat-cell *matCellDef="let row">
+              {{ row[item] }}
+            </td>
+          </ng-container>
+        </div>
+        <tr mat-header-row *matHeaderRowDef="displayedExperiencesColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedExperiencesColumns"></tr>
+    
+        <tr class="mat-row" *matNoDataRow>
+          <td class="mat-cell" colspan="9999" >No data to display</td>
+        </tr>
+      </table>
+
+    </div>
+  </div>
+</ng-template>
+
+<!--delete confirmation popup-->
+<ng-template #deleteconfirmationPopupTemplate>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">
+      deletion confirmation
+    </h4>
+    <button
+      type="button"
+      class="btn btn-light py-1 border"
+      aria-label="Close"
+      (click)="modalRef.hide()"
+    >
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body text-center">
+    <div class="example-form">
+     <p>Do you want to delete this item? </p>
+      <div class="w-100">
+        <button
+          class="btn btn-danger w-40 mt-2 mx-2"
+          (click)="deleteCv()"
+        >
+          Yes
+        </button>
+      <!-- </div>
+      <div class="w-100 text-center"> -->
+        <button
+          class="btn btn-secondary w-40 mt-2 mx-2"
+          (click)="modalRef.hide()"
+        >
+          No
+        </button>
+      </div>
+    </div>
+  </div>
+</ng-template>
+
