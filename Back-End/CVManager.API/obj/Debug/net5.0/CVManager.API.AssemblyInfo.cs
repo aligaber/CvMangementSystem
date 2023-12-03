@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("CVManager.API")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+63daeb8ce98eab34f9a29e372c9ba36c24a9f467")]
 [assembly: System.Reflection.AssemblyProductAttribute("CVManager.API")]
 [assembly: System.Reflection.AssemblyTitleAttribute("CVManager.API")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

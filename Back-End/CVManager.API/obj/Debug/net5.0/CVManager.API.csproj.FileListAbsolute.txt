@@ -155,3 +155,4 @@ D:\Technical\Projects\CVManagerSystem\Back-End\CVManager.API\bin\Debug\net5.0\Fl
 D:\Technical\Projects\CVManagerSystem\Back-End\CVManager.API\bin\Debug\net5.0\FluentValidation.AspNetCore.dll
 D:\Technical\Projects\CVManagerSystem\Back-End\CVManager.API\bin\Debug\net5.0\FluentValidation.DependencyInjectionExtensions.dll
 D:\Technical\Projects\CVManagerSystem\Back-End\CVManager.API\obj\Debug\net5.0\CVManager.API.MvcApplicationPartsAssemblyInfo.cs
+D:\Technical\Projects\CVManagerSystem\Back-End\CVManager.API\obj\Debug\net5.0\CVManager.API.sourcelink.json

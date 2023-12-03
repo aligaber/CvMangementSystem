@@ -2,6 +2,7 @@
 using CVManager.Core.IServices;
 using Microsoft.AspNetCore.Mvc;
 using System;
+using System.Threading.Tasks;
 
 namespace CVManager.API.Controllers
 {
@@ -16,9 +17,9 @@ namespace CVManager.API.Controllers
         }
 
         [HttpGet("GetCvsList")]
-        public IActionResult GetAll(int pageNumber, int pageSize)
+        public async Task<IActionResult> GetAllAsync(int pageNumber, int pageSize)
         {
-            var items = _cvManagerService.GetCvsList(pageNumber, pageSize);
+            var items = await _cvManagerService.GetCvsListAsync(pageNumber, pageSize);
 
             var pagedCvs = new PagedList<CvDTO>
             {
@@ -29,17 +30,17 @@ namespace CVManager.API.Controllers
         }
 
         [HttpGet("Get/{cvId}")]
-        public IActionResult GetById(int cvId)
+        public async Task<IActionResult> GetByIdAsync(int cvId)
         {
-            return Ok(_cvManagerService.GetById(cvId));
+            return Ok(await _cvManagerService.GetByIdAsync(cvId));
         }
 
         [HttpPost("Create")]
-        public IActionResult Create(CvDTO cv)
+        public async Task<IActionResult> CreateAsync(CvDTO cv)
         {
             try
             {
-                var cvId = _cvManagerService.CreateCv(cv);
+                var cvId =await _cvManagerService.CreateCvAsync(cv);
 
                 return Created($"api/cvManager/get/{cvId}", cvId);
             }
@@ -50,11 +51,11 @@ namespace CVManager.API.Controllers
         }
 
         [HttpPut("Update")]
-        public IActionResult Update(CvDTO cv)
+        public async Task<IActionResult> UpdateAsync(CvDTO cv)
         {
             try
             {
-                var cvId = _cvManagerService.UpdateCv(cv);
+                var cvId = await _cvManagerService.UpdateCvAsync(cv);
                 return Ok(cvId);
             }
             catch (Exception)

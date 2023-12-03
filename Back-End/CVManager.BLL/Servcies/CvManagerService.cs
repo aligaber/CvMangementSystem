@@ -18,9 +18,9 @@ namespace CVManager.BLL.Servcies
         {
             _cvManagerRepository = cvManagerRepository;
         }
-        public int CreateCv(CvDTO cv)
+        public async Task<int> CreateCvAsync(CvDTO cv)
         {
-           return _cvManagerRepository.CreateCv(cv);
+           return await _cvManagerRepository.CreateCvAsync(cv);
         }
 
         public void DeleteCv(int cvId)
@@ -28,19 +28,19 @@ namespace CVManager.BLL.Servcies
             _cvManagerRepository.DeleteCv(cvId);
         }
 
-        public CvDTO GetById(int cvId)
+        public async Task<CvDTO> GetByIdAsync(int cvId)
         {
-          return _cvManagerRepository.GetById(cvId); 
+          return await _cvManagerRepository.GetByIdAsync(cvId); 
         }
 
-        public IPagedList<CvDTO> GetCvsList(int pageNumber, int pageSize)
+        public async Task<IPagedList<CvDTO>> GetCvsListAsync(int pageNumber, int pageSize)
         {
-            return _cvManagerRepository.GetCvsList(pageNumber, pageSize);
+            return await _cvManagerRepository.GetCvsListAsync(pageNumber, pageSize);
         }
 
-        public int UpdateCv(CvDTO cv)
+        public async Task<int> UpdateCvAsync(CvDTO cv)
         {
-            return _cvManagerRepository.UpdateCv(cv);
+            return await _cvManagerRepository.UpdateCvAsync(cv);
         }
 
     }

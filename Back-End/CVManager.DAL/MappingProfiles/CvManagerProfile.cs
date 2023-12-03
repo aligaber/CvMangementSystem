@@ -13,7 +13,9 @@ namespace CVManager.DAL.MappingProfiles
     {
         public CvManagerProfile()
         {
-            CreateMap<Cv, CvDTO>().ReverseMap();
+            CreateMap<Cv, CvDTO>();
+            CreateMap<CvDTO, Cv>()
+                .ForMember(c => c.ExperienceInformation, opt => opt.Ignore());
         }
     }
 }

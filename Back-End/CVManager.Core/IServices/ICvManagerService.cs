@@ -10,10 +10,10 @@ namespace CVManager.Core.IServices
 {
     public interface ICvManagerService
     {
-        IPagedList<CvDTO> GetCvsList(int pageNumber, int pageSize);
-        CvDTO GetById(int cvId);
-        int CreateCv(CvDTO cv);
-        int UpdateCv(CvDTO cv);
+       Task<IPagedList<CvDTO>> GetCvsListAsync(int pageNumber, int pageSize);
+        Task<CvDTO> GetByIdAsync(int cvId);
+        Task<int> CreateCvAsync(CvDTO cv);
+        Task<int> UpdateCvAsync(CvDTO cv);
         void DeleteCv(int cvId);
     }
 }

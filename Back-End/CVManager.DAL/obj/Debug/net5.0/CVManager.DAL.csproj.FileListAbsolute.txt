@@ -34,3 +34,4 @@ D:\Technical\Projects\CVManagerSystem\Back-End\CVManager.DAL\obj\Debug\net5.0\re
 D:\Technical\Projects\CVManagerSystem\Back-End\CVManager.DAL\obj\Debug\net5.0\CVManager.DAL.pdb
 D:\Technical\Projects\CVManagerSystem\Back-End\CVManager.DAL\obj\Debug\net5.0\CVManager.DAL.genruntimeconfig.cache
 D:\Technical\Projects\CVManagerSystem\Back-End\CVManager.DAL\obj\Debug\net5.0\ref\CVManager.DAL.dll
+D:\Technical\Projects\CVManagerSystem\Back-End\CVManager.DAL\obj\Debug\net5.0\CVManager.DAL.sourcelink.json
